@@ -1,0 +1,91 @@
+<!-- @dsCard group="Conecta" viewport="1120x780" name="Plataforma Conecta (mayores)" subtitle="Comunicación accesible · texto grande, escuchar, alto contraste" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vida Plena Conecta</title>
+<link rel="stylesheet" href="./styles.css">
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { font-family: var(--font-sans); background: var(--surface-page); color: var(--text-body); }
+  #scroll { height: 100vh; overflow-y: auto; }
+  a { text-decoration: none; }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="Conecta.jsx"></script>
+<script type="text/babel">
+  function App() {
+    const bp = useBreakpoint();
+    const [route, setRoute] = React.useState('home');
+    const [article, setArticle] = React.useState(null);
+    const [scale, setScale] = React.useState(() => {
+      const v = parseFloat(localStorage.getItem('vp-conecta-scale'));
+      return isNaN(v) ? 1 : v;
+    });
+    const [speakingId, setSpeakingId] = React.useState(null);
+
+    // keep scale within the active device's limits + persist
+    React.useEffect(() => {
+      const lim = window.SCALE_LIMITS[bp];
+      setScale(s => Math.min(lim.max, Math.max(lim.min, s)));
+    }, [bp]);
+    React.useEffect(() => { localStorage.setItem('vp-conecta-scale', String(scale)); }, [scale]);
+
+    // prime voices
+    React.useEffect(() => {
+      if (window.speechSynthesis) { window.speechSynthesis.getVoices(); window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices(); }
+      return () => { if (window.speechSynthesis) window.speechSynthesis.cancel(); };
+    }, []);
+
+    const stopSpeech = () => { if (window.speechSynthesis) window.speechSynthesis.cancel(); setSpeakingId(null); };
+    const pickVoice = (voices) => {
+      const es = voices.filter(v => /^es/i.test(v.lang));
+      // Prefer cloud-backed neural/natural voices (much more human-sounding)
+      const natural = es.find(v => /natural|online|neural/i.test(v.name));
+      if (natural) return natural;
+      // Prefer known high-quality voices by name
+      const preferred = es.find(v => /laura|monica|paulina|jorge|pablo|maria|google/i.test(v.name));
+      if (preferred) return preferred;
+      // Avoid purely local/offline robot voices as a last resort only
+      return es[0] || voices.find(v => /es/i.test(v.lang)) || null;
+    };
+
+    const speak = (id, text) => {
+      const synth = window.speechSynthesis;
+      if (!synth) { alert('Tu navegador no permite la lectura en voz alta.'); return; }
+      if (speakingId === id) { stopSpeech(); return; }
+      synth.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'es-ES'; u.rate = 0.9; u.pitch = 1.05; u.volume = 1;
+      const voices = synth.getVoices();
+      const v = voices.length ? pickVoice(voices) : null;
+      if (v) u.voice = v;
+      u.onend = () => setSpeakingId(cur => (cur === id ? null : cur));
+      u.onerror = () => setSpeakingId(cur => (cur === id ? null : cur));
+      synth.speak(u); setSpeakingId(id);
+    };
+
+    const go = (r, payload) => { stopSpeech(); if (payload) setArticle(payload); setRoute(r); const el = document.getElementById('scroll'); if (el) el.scrollTop = 0; };
+
+    return (
+      <div id="scroll">
+        <Topbar go={go} scale={scale} setScale={setScale} bp={bp} speak={speak} speakingId={speakingId} />
+        <main style={{ zoom: scale }}>
+          {route === 'home' && <Home go={go} bp={bp} speak={speak} speakingId={speakingId} />}
+          {route === 'article' && <Article article={article} go={go} bp={bp} scale={1} speak={speak} speakingId={speakingId} />}
+        </main>
+      </div>
+    );
+  }
+  function mount(){ if (!window.Home || !window.Article || !window.Topbar || !window.useBreakpoint) return setTimeout(mount, 30); ReactDOM.createRoot(document.getElementById('root')).render(<App/>); }
+  mount();
+</script>
+</body>
+</html>
