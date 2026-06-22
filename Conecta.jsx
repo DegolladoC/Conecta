@@ -44,6 +44,7 @@ const ci = {
   clock: <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>,
   phone: <path d="M5 3h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/>,
   menu: <path d="M3 6h18M3 12h18M3 18h18"/>,
+  mic: <><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/><path d="M8 22h8"/></>,
 };
 
 const CATS = {
@@ -86,6 +87,36 @@ function articleSpeech(a) {
   return [a.title, ...a.body, 'Recuerda: ' + (a.points || []).join('. ')].join('. ');
 }
 
+/* ---------- voice helpers ---------- */
+const FEMALE_HINTS = /laura|monica|paulina|maria|elena|isabel|rosa|carmen|pilar|lucia|diana|silvia|helena|ines|female|mujer/i;
+const MALE_HINTS   = /jorge|pablo|alejandro|carlos|juan|diego|enrique|sergio|antonio|manuel|pedro|miguel|alvaro|raul|male|hombre/i;
+
+function guessGender(voice) {
+  if (FEMALE_HINTS.test(voice.name)) return 'f';
+  if (MALE_HINTS.test(voice.name))   return 'm';
+  return null;
+}
+
+function cleanVoiceName(name) {
+  const cleaned = name
+    .replace(/Microsoft\s+/gi, '').replace(/Google\s+/gi, '').replace(/Apple\s+/gi, '')
+    .replace(/\b(Online|Natural|Neural|Enhanced|Desktop|Mobile)\b/gi, '')
+    .replace(/-?\s*(Spanish|Español)\s*\([^)]*\)/gi, '')
+    .replace(/\([^)]*\)/g, '')
+    .replace(/\s{2,}/g, ' ').replace(/(^\s*-\s*|\s*-\s*$)/g, '').trim();
+  return cleaned || name;
+}
+
+function selectVoices(voices) {
+  const es = voices.filter(v => /^es/i.test(v.lang));
+  es.sort((a, b) => (/natural|online|neural/i.test(a.name) ? 0 : 1) - (/natural|online|neural/i.test(b.name) ? 0 : 1));
+  const f    = es.filter(v => FEMALE_HINTS.test(v.name)).slice(0, 2);
+  const m    = es.filter(v => MALE_HINTS.test(v.name)).slice(0, 2);
+  const rest = es.filter(v => !FEMALE_HINTS.test(v.name) && !MALE_HINTS.test(v.name));
+  const out  = [...f, ...m];
+  return out.length < 4 ? [...out, ...rest.slice(0, 4 - out.length)] : out;
+}
+
 /* ---------- scale control ---------- */
 function ScaleControl({ scale, setScale, bp }) {
   const lim = SCALE_LIMITS[bp];
@@ -104,6 +135,76 @@ function ScaleControl({ scale, setScale, bp }) {
   );
 }
 
+/* ---------- voice picker modal ---------- */
+function VoicePicker({ availableVoices, selectedVoiceName, setSelectedVoiceName, onClose }) {
+  const [previewName, setPreviewName] = React.useState(null);
+
+  const doPreview = (voice) => {
+    const synth = window.speechSynthesis;
+    if (!synth) return;
+    synth.cancel();
+    if (previewName === voice.name) { setPreviewName(null); return; }
+    const u = new SpeechSynthesisUtterance('Hola, así es como suena mi voz.');
+    u.lang = voice.lang; u.rate = 0.9; u.pitch = 1.05; u.volume = 1; u.voice = voice;
+    u.onend = u.onerror = () => setPreviewName(null);
+    synth.speak(u);
+    setPreviewName(voice.name);
+  };
+
+  const groups = [
+    { label: 'Voces femeninas', color: '#9b59a0', voices: availableVoices.filter(v => guessGender(v) === 'f') },
+    { label: 'Voces masculinas', color: '#2e7abf', voices: availableVoices.filter(v => guessGender(v) === 'm') },
+    { label: 'Otras voces',      color: 'var(--text-muted)', voices: availableVoices.filter(v => !guessGender(v)) },
+  ].filter(g => g.voices.length);
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.45)', padding: 20 }}
+      onClick={onClose}>
+      <div style={{ background: 'var(--surface-card)', borderRadius: 22, padding: '28px 24px', maxWidth: 500, width: '100%', maxHeight: '82vh', overflowY: 'auto', boxShadow: '0 12px 50px rgba(0,0,0,0.22)' }}
+        onClick={e => e.stopPropagation()}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 28, margin: 0, color: 'var(--text-strong)' }}>Elige una voz</h2>
+          <button onClick={onClose} aria-label="Cerrar" style={{ width: 44, height: 44, borderRadius: '50%', border: 0, background: 'var(--surface-page)', cursor: 'pointer', fontSize: 22, color: 'var(--text-body)', display: 'grid', placeItems: 'center' }}>✕</button>
+        </div>
+        {availableVoices.length === 0 ? (
+          <p style={{ fontSize: 18, color: 'var(--text-body)', lineHeight: 1.6 }}>No se encontraron voces en español en este dispositivo.</p>
+        ) : groups.map(g => (
+          <div key={g.label} style={{ marginBottom: 22 }}>
+            <p style={{ fontSize: 13, fontWeight: 700, color: g.color, textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 10px' }}>{g.label}</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {g.voices.map(voice => {
+                const sel  = voice.name === selectedVoiceName;
+                const prev = previewName === voice.name;
+                return (
+                  <div key={voice.name} onClick={() => setSelectedVoiceName(voice.name)}
+                    style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 16px', borderRadius: 14,
+                      border: `${sel ? '2.5px' : '1.5px'} solid ${sel ? 'var(--pine-700)' : 'var(--border-default)'}`,
+                      background: sel ? 'rgba(44,92,60,0.07)' : 'var(--surface-page)', cursor: 'pointer' }}>
+                    <span style={{ width: 26, height: 26, borderRadius: '50%', flexShrink: 0,
+                      border: `2px solid ${sel ? 'var(--pine-700)' : 'var(--border-default)'}`,
+                      background: sel ? 'var(--pine-700)' : 'transparent',
+                      display: 'grid', placeItems: 'center', color: 'white' }}>
+                      {sel && <CIcon path={ci.check} size={14} stroke={3} />}
+                    </span>
+                    <span style={{ flex: 1, fontSize: 19, fontWeight: sel ? 700 : 500, color: 'var(--text-strong)' }}>{cleanVoiceName(voice.name)}</span>
+                    <button onClick={e => { e.stopPropagation(); doPreview(voice); }} aria-label={prev ? 'Detener' : 'Probar voz'}
+                      style={{ flexShrink: 0, height: 40, padding: '0 14px', borderRadius: 10, border: '1.5px solid var(--border-default)',
+                        background: 'var(--surface-card)', cursor: 'pointer', fontSize: 15, fontWeight: 600, color: 'var(--pine-700)',
+                        display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <CIcon path={prev ? ci.stop : ci.sound} size={17} fill={prev ? 'currentColor' : 'none'} stroke={prev ? 0 : 2} />
+                      {prev ? 'Detener' : 'Probar'}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 /* ---------- listen button ---------- */
 function Listen({ id, text, speak, speakingId, variant = 'secondary', size = 'lg', label = 'Escuchar', fullWidth = false, style = {} }) {
   const active = speakingId === id;
@@ -117,14 +218,14 @@ function Listen({ id, text, speak, speakingId, variant = 'secondary', size = 'lg
 }
 
 /* ---------- top bar ---------- */
-function Topbar({ go, scale, setScale, bp, speak, speakingId }) {
+function Topbar({ go, scale, setScale, bp, speak, speakingId, onVoicePicker }) {
   const compact = bp !== 'desktop';
   return (
     <header style={{ background: 'var(--surface-card)', borderBottom: '1px solid var(--border-subtle)', position: 'sticky', top: 0, zIndex: 20 }}>
       <div style={{ maxWidth: 1120, margin: '0 auto', padding: compact ? '12px 18px' : '16px 32px', display: 'flex', alignItems: 'center', gap: compact ? 12 : 24 }}>
         <a onClick={() => go('home')} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', flexShrink: 0 }}>
           <img src="./assets/logo-mark-transparent.png" alt="Vida Plena" style={{ height: compact ? 38 : 44 }} />
-          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: compact ? 22 : 26, color: 'var(--pine-700)' }}>Conecta</span>
+          <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: compact ? 22 : 26, color: 'var(--pine-700)' }}>Vida Plena</span>
         </a>
         {!compact ? (
           <nav style={{ display: 'flex', gap: 6, marginLeft: 8 }}>
@@ -135,6 +236,13 @@ function Topbar({ go, scale, setScale, bp, speak, speakingId }) {
         ) : null}
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
           <ScaleControl scale={scale} setScale={setScale} bp={bp} />
+          <button onClick={onVoicePicker} aria-label="Elegir voz"
+            style={{ height: compact ? 44 : 42, padding: '0 16px', borderRadius: 'var(--radius-full)', border: '1px solid var(--border-default)',
+              background: 'var(--surface-card)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 7,
+              fontFamily: 'var(--font-sans)', fontSize: 16, fontWeight: 600, color: 'var(--pine-700)', flexShrink: 0 }}>
+            <CIcon path={ci.mic} size={20} />
+            {bp !== 'mobile' && <span>Voz</span>}
+          </button>
           {bp !== 'mobile' ? <Avatar name="Carmen Ruiz" size={compact ? 42 : 46} ring /> : null}
         </div>
       </div>
@@ -271,4 +379,4 @@ function Article({ article, go, bp, scale, speak, speakingId }) {
   );
 }
 
-Object.assign(window, { Home, Article, Topbar, useBreakpoint, SCALE_LIMITS });
+Object.assign(window, { Home, Article, Topbar, VoicePicker, useBreakpoint, SCALE_LIMITS, selectVoices });

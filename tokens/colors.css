@@ -1,0 +1,92 @@
+/* Vida Plena — Color tokens
+   Pine green (primary), Brass gold (accent), warm Sand neutrals, earthy semantics.
+   Sampled from the brand mark: pine ≈ #134E48, sand ≈ #F4EFE2, gold ≈ #C2A14E. */
+
+:root {
+  /* ---- Pine (primary brand green) ---- */
+  --pine-900: #0C3A36;
+  --pine-800: #0F4641;
+  --pine-700: #134E48; /* primary */
+  --pine-600: #1C5F58;
+  --pine-500: #2E7268;
+  --pine-400: #5B928A;
+  --pine-300: #93B6B0;
+  --pine-200: #C5D7D3;
+  --pine-100: #E5EEEC;
+  --pine-50:  #F2F7F5;
+
+  /* ---- Brass (accent / gold) ---- */
+  --gold-700: #8F6E2C;
+  --gold-600: #A9853A;
+  --gold-500: #C2A14E; /* accent */
+  --gold-400: #D4B873;
+  --gold-300: #E4CF9E;
+  --gold-200: #F0E3C6;
+  --gold-100: #F8F0DD;
+
+  /* ---- Sand (warm neutrals / paper) ---- */
+  --sand-50:  #FBF9F3; /* lightest page */
+  --sand-100: #F4EFE2; /* canvas / brand cream */
+  --sand-200: #EBE3D2;
+  --sand-300: #DDD2BC;
+  --sand-400: #C9BCA0;
+
+  /* ---- Ink (warm near-black greens for text) ---- */
+  --ink-900: #1B2321;
+  --ink-800: #2A3431;
+  --ink-700: #3A453F;
+  --ink-600: #525C56;
+  --ink-500: #6B746E;
+  --ink-400: #8A938C;
+  --ink-300: #AEB5AF;
+
+  /* ---- Earthy semantic hues ---- */
+  --leaf:  #4B8B5E;   /* success */
+  --leaf-soft: #E4EFE5;
+  --amber: #C2882E;   /* warning */
+  --amber-soft: #F7EBD2;
+  --clay:  #B14A3A;   /* danger */
+  --clay-soft: #F4E0DA;
+  --sky:   #3E7C8C;   /* info */
+  --sky-soft: #E0EDF0;
+
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* ================= Semantic aliases ================= */
+  --color-brand:            var(--pine-700);
+  --color-brand-strong:     var(--pine-800);
+  --color-brand-soft:       var(--pine-100);
+  --color-accent:           var(--gold-500);
+  --color-accent-strong:    var(--gold-600);
+  --color-accent-soft:      var(--gold-100);
+
+  /* Surfaces */
+  --surface-page:    var(--sand-50);
+  --surface-canvas:  var(--sand-100);
+  --surface-card:    var(--white);
+  --surface-raised:  var(--white);
+  --surface-sunken:  var(--sand-100);
+  --surface-inverse: var(--pine-700);
+  --surface-overlay: rgba(27, 35, 33, 0.45);
+
+  /* Text */
+  --text-strong:   var(--ink-900);
+  --text-body:     var(--ink-700);
+  --text-muted:    var(--ink-500);
+  --text-subtle:   var(--ink-400);
+  --text-on-brand: var(--sand-100);
+  --text-on-accent: var(--ink-900);
+  --text-brand:    var(--pine-700);
+  --text-link:     var(--pine-600);
+
+  /* Borders */
+  --border-subtle:  rgba(27, 35, 33, 0.08);
+  --border-default: rgba(27, 35, 33, 0.14);
+  --border-strong:  rgba(27, 35, 33, 0.24);
+  --border-brand:   var(--pine-200);
+  --border-accent:  var(--gold-300);
+
+  /* Focus ring */
+  --focus-ring: rgba(46, 114, 104, 0.45);
+}

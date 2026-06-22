@@ -1,0 +1,48 @@
+/* Vida Plena — Spacing, radius, shadow, layout, motion tokens */
+
+:root {
+  /* Spacing scale (4px base) */
+  --space-0: 0;
+  --space-1: 0.25rem;  /* 4  */
+  --space-2: 0.5rem;   /* 8  */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-5: 1.5rem;   /* 24 */
+  --space-6: 2rem;     /* 32 */
+  --space-7: 2.5rem;   /* 40 */
+  --space-8: 3rem;     /* 48 */
+  --space-9: 4rem;     /* 64 */
+  --space-10: 6rem;    /* 96 */
+  --space-11: 8rem;    /* 128 */
+
+  /* Radii — soft, organic; the mark itself is fully round */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --radius-2xl: 40px;
+  --radius-full: 9999px;
+
+  /* Shadows — warm, low, diffuse (tinted with ink, never pure black) */
+  --shadow-xs: 0 1px 2px rgba(27, 35, 33, 0.06);
+  --shadow-sm: 0 2px 6px rgba(27, 35, 33, 0.07);
+  --shadow-md: 0 6px 18px rgba(27, 35, 33, 0.09);
+  --shadow-lg: 0 16px 38px rgba(27, 35, 33, 0.12);
+  --shadow-xl: 0 28px 60px rgba(27, 35, 33, 0.16);
+  --shadow-focus: 0 0 0 3px var(--focus-ring);
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 880px;
+  --container-lg: 1120px;
+  --container-xl: 1280px;
+  --gutter: var(--space-5);
+
+  /* Motion — calm, never bouncy */
+  --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1); /* @kind other */
+  --ease-emphasized: cubic-bezier(0.4, 0, 0.1, 1); /* @kind other */
+  --duration-fast: 140ms; /* @kind other */
+  --duration-normal: 240ms; /* @kind other */
+  --duration-slow: 420ms; /* @kind other */
+}
