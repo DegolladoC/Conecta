@@ -93,11 +93,11 @@
     return (
       <div id="scroll">
         <Topbar go={go} scale={scale} setScale={setScale} bp={bp} speak={speak} speakingId={speakingId} onVoicePicker={() => setVoicePickerOpen(true)} />
+        {route === 'home' && <AboutSection bp={bp} />}
         <main style={{ zoom: scale }}>
           {route === 'home' && <Home go={go} bp={bp} speak={speak} speakingId={speakingId} />}
           {route === 'article' && <Article article={article} go={go} bp={bp} scale={1} speak={speak} speakingId={speakingId} />}
         </main>
-        {route === 'home' && <AboutSection bp={bp} />}
         <Footer bp={bp} />
         {voicePickerOpen && <VoicePicker availableVoices={availableVoices} selectedVoiceName={selectedVoiceName} setSelectedVoiceName={setSelectedVoiceName} speechRate={speechRate} setSpeechRate={setSpeechRate} onClose={() => setVoicePickerOpen(false)} />}
       </div>
