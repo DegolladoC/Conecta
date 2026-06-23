@@ -55,30 +55,202 @@ const CATS = {
 };
 
 const ARTICLES = [
+  // ---- SALUD ----
   { id: 'a1', cat: 'salud', title: 'Cómo cuidar tu presión arterial cada día', mins: 6,
     excerpt: 'Pasos sencillos para medir y mantener tu presión en casa, sin complicaciones.',
     body: ['La presión arterial nos dice cuánto esfuerzo hace tu corazón para mover la sangre. Vigilarla es una de las formas más simples de cuidar tu salud.',
       'Mídela siempre a la misma hora, sentado y relajado, con el brazo apoyado sobre la mesa. Anota el resultado en una libreta o en la aplicación.',
       'Camina treinta minutos al día, reduce la sal y bebe agua. Si los números suben de forma seguida, habla con tu médico sin esperar.'],
     points: ['Mide a la misma hora cada día', 'Camina treinta minutos', 'Reduce la sal en tus comidas'] },
+  { id: 'a1b', cat: 'salud', title: 'Dormir bien: claves para un sueño reparador', mins: 5,
+    excerpt: 'El sueño cambia con la edad, pero hay hábitos sencillos que marcan la diferencia cada noche.',
+    body: ['Dormir bien es tan importante como comer sano o hacer ejercicio. Durante el sueño, el cuerpo repara tejidos, consolida la memoria y regula el sistema inmune.',
+      'Mantén un horario fijo: acuéstate y levántate a la misma hora todos los días, incluso los fines de semana. La regularidad es la clave del sueño profundo.',
+      'Evita la cafeína después del mediodía, apaga las pantallas una hora antes de acostarte y mantén la habitación fresca y oscura. Si te despiertas por la noche, no mires el reloj.'],
+    points: ['Misma hora de dormir y despertar', 'Sin cafeína después del mediodía', 'Habitación oscura y fresca'] },
+  { id: 'a1c', cat: 'salud', title: 'Visita al médico: las preguntas que debes hacer', mins: 4,
+    excerpt: 'Ir preparado a la consulta te ayuda a sacar el máximo partido y a no olvidar nada importante.',
+    body: ['Una consulta médica suele durar pocos minutos. Prepararse antes de ir te permite aprovechar cada momento y salir con respuestas claras.',
+      'Escribe tus dudas antes de entrar, por orden de importancia. Lleva una lista de todos los medicamentos que tomas, con dosis y horarios. Si es posible, ve acompañado de alguien de confianza.',
+      'No salgas sin entender el diagnóstico, el tratamiento y cuándo debes volver. Si algo no queda claro, pide que te lo expliquen de otra forma. Preguntar siempre es lo correcto.'],
+    points: ['Escribe tus preguntas antes de entrar', 'Lleva la lista de tus medicamentos', 'Pide que te expliquen lo que no entiendas'] },
+  { id: 'a1d', cat: 'salud', title: 'Cuidado de los pies: pasos sencillos cada día', mins: 4,
+    excerpt: 'Unos pies sanos te permiten moverte con seguridad y disfrutar cada día sin molestias.',
+    body: ['Los pies sostienen todo el peso del cuerpo durante años. Con la edad, la piel se seca más, las uñas se endurecen y la circulación puede ser menos eficiente.',
+      'Lava los pies con agua tibia y jabón suave cada día. Sécalos bien entre los dedos y aplica crema hidratante, evitando el espacio entre los dedos. Córtate las uñas de forma recta para prevenir encarnaduras.',
+      'Usa zapatos cómodos y que sujeten bien el pie. Si tienes diabetes, revísate los pies cada día y consulta a tu médico ante cualquier herida, por pequeña que sea.'],
+    points: ['Lava y seca bien entre los dedos', 'Hidrata la piel todos los días', 'Usa calzado cómodo y de tu talla'] },
+  { id: 'a1e', cat: 'salud', title: 'Cómo prevenir caídas en casa', mins: 5,
+    excerpt: 'Pequeños cambios en el hogar reducen enormemente el riesgo de caídas y sus consecuencias.',
+    body: ['Las caídas son una de las principales causas de lesiones en personas mayores, pero muchas se pueden evitar con ajustes sencillos en el hogar y en los hábitos diarios.',
+      'Retira alfombras sueltas, asegura los cables y mejora la iluminación, especialmente en pasillos y el baño. Instala barras de apoyo junto al inodoro y en la ducha. Usa calzado antideslizante dentro de casa.',
+      'El ejercicio también protege: fortalecer las piernas y mejorar el equilibrio reduce mucho el riesgo. Si necesitas gafas o audífono, úsalos siempre. Y si tomas varios medicamentos, habla con tu médico sobre el mareo como posible efecto secundario.'],
+    points: ['Retira alfombras y obstáculos del suelo', 'Instala barras de apoyo en el baño', 'Haz ejercicio para mejorar el equilibrio'] },
+  { id: 'a1f', cat: 'salud', title: 'Señales de alerta que no debes ignorar', mins: 5,
+    excerpt: 'Conocer las señales tempranas de problemas de salud puede marcar una gran diferencia.',
+    body: ['A veces el cuerpo avisa antes de que un problema se vuelva grave. Reconocer esas señales y actuar rápido puede hacer una gran diferencia en el resultado.',
+      'Busca atención médica urgente ante: dolor en el pecho, dificultad para respirar, debilidad o entumecimiento repentino en un lado del cuerpo, confusión súbita o pérdida de visión repentina. Pueden ser síntomas de infarto o derrame cerebral.',
+      'Consulta a tu médico sin esperar ante pérdida de peso sin causa, fatiga persistente, cambios en el estado de ánimo que duran semanas o cualquier síntoma nuevo que te preocupe. Nunca es una molestia consultar.'],
+    points: ['Ante dolor en el pecho, busca ayuda urgente', 'No ignores la fatiga persistente', 'Cualquier síntoma nuevo merece consulta'] },
+  { id: 'a1g', cat: 'salud', title: 'Chequeos preventivos: cuáles necesitas y cuándo', mins: 5,
+    excerpt: 'Las revisiones periódicas detectan problemas antes de que aparezcan síntomas. No esperes a estar enfermo.',
+    body: ['La medicina preventiva es la más eficaz. Muchas enfermedades graves tienen mejor tratamiento cuando se detectan en etapas tempranas, incluso antes de que causen molestias.',
+      'Habla con tu médico sobre las revisiones que te corresponden según tu edad: presión arterial, glucosa, colesterol, función renal y tiroides son controles habituales. Las mujeres deben revisar mamografía y densidad ósea; los hombres, la próstata.',
+      'Lleva un registro de tus resultados y compáralos en cada visita. Una libreta sencilla o una aplicación de salud puede ayudarte a ver cómo evolucionan tus valores a lo largo del tiempo.'],
+    points: ['Controla presión, glucosa y colesterol', 'Lleva un registro de tus resultados', 'Habla con tu médico sobre tus revisiones'] },
+  { id: 'a1h', cat: 'salud', title: 'Salud ocular: cuida tu vista cada día', mins: 4,
+    excerpt: 'La vista cambia con los años, pero con cuidados adecuados puedes protegerla durante mucho tiempo.',
+    body: ['Con la edad es normal que la vista cambie: puede costar más enfocar de cerca, se necesita más luz para leer o aparecer más sensibilidad a los brillos. Sin embargo, hay condiciones evitables con revisiones y hábitos correctos.',
+      'Visita al oftalmólogo al menos una vez al año. El glaucoma, las cataratas y la degeneración macular son más frecuentes después de los 60, pero se pueden detectar y tratar a tiempo.',
+      'Protege tus ojos del sol con gafas con filtro UV. Al leer, asegúrate de tener buena luz. Si notas visión borrosa, manchas, destellos o pérdida de visión repentina, consulta sin demora.'],
+    points: ['Visita al oftalmólogo cada año', 'Usa gafas con protección UV', 'Ante cambios bruscos de visión, consulta urgente'] },
+  // ---- NUTRICIÓN ----
   { id: 'a2', cat: 'nutricion', title: 'Comidas fáciles y nutritivas para la semana', mins: 5,
     excerpt: 'Ideas simples, económicas y buenas para tu cuerpo, listas en pocos minutos.',
     body: ['Comer bien no tiene que ser complicado ni caro. Con unos pocos ingredientes frescos puedes preparar platos completos y sabrosos.',
       'Llena la mitad de tu plato con verduras, un cuarto con proteína (huevo, pescado o legumbres) y el resto con un cereal integral.',
       'Cocina de más y guarda raciones en la nevera. Así siempre tendrás algo bueno listo para calentar.'],
     points: ['Media de verduras en cada plato', 'Cocina de más y guarda raciones', 'Bebe agua en lugar de refrescos'] },
+  { id: 'a2b', cat: 'nutricion', title: 'Proteínas: cuánta necesitas después de los 60', mins: 5,
+    excerpt: 'La proteína es esencial para mantener músculo y fuerza. Descubre cuáles son las mejores fuentes.',
+    body: ['Después de los 60 años, el cuerpo empieza a perder músculo de forma gradual. La proteína es el nutriente clave para frenar ese proceso y mantener la fuerza y la independencia.',
+      'Las mejores fuentes son: huevo, pescado azul como el salmón o la sardina, pollo, legumbres (lentejas, garbanzos, frijoles) y lácteos bajos en grasa. Intenta incluir proteína en cada comida del día.',
+      'No es necesario comer grandes cantidades. Un huevo en el desayuno, legumbres al mediodía y un poco de pescado o pollo por la tarde ya cubren bien las necesidades de la mayoría.'],
+    points: ['Incluye proteína en cada comida', 'El huevo y las legumbres son excelentes fuentes', 'El pescado azul nutre músculo y corazón'] },
+  { id: 'a2c', cat: 'nutricion', title: 'Calcio y vitamina D: los aliados de tus huesos', mins: 5,
+    excerpt: 'Dos nutrientes esenciales para mantener los huesos fuertes y reducir el riesgo de osteoporosis.',
+    body: ['Con la edad, los huesos pierden densidad con mayor facilidad. El calcio y la vitamina D son los nutrientes clave para mantenerlos fuertes y reducir el riesgo de fractura.',
+      'El calcio se encuentra en lácteos, sardinas con espina, almendras, brócoli y leches vegetales enriquecidas. La vitamina D la produce el cuerpo al exponerse al sol, y también está en el salmón, los huevos y alimentos enriquecidos.',
+      'Si tu alimentación o tu exposición al sol son limitadas, habla con tu médico sobre la posibilidad de tomar un suplemento. Es uno de los más recomendados en personas mayores.'],
+    points: ['Come lácteos o alimentos ricos en calcio', 'Toma algo de sol cada día de forma segura', 'Consulta a tu médico sobre suplementos'] },
+  { id: 'a2d', cat: 'nutricion', title: 'Hidratación: tan importante como lo que comes', mins: 4,
+    excerpt: 'Con la edad se percibe menos la sed, pero la necesidad de agua sigue siendo igual o mayor.',
+    body: ['Uno de los cambios menos conocidos del envejecimiento es que disminuye la sensación de sed, lo que aumenta el riesgo de deshidratación incluso sin darse cuenta.',
+      'Bebe agua de forma regular a lo largo del día, aunque no tengas sed. El objetivo habitual es entre seis y ocho vasos diarios. Las infusiones, los caldos y las frutas con mucha agua como la sandía o la naranja también cuentan.',
+      'Señales de deshidratación: orina oscura, cansancio sin causa o dolor de cabeza. Si tomas diuréticos o hace mucho calor, necesitas beber más. Lleva siempre una botella de agua contigo.'],
+    points: ['Bebe agua aunque no tengas sed', 'Orina clara es señal de buena hidratación', 'Las infusiones y caldos también hidratan'] },
+  { id: 'a2e', cat: 'nutricion', title: 'Cómo leer las etiquetas de los alimentos', mins: 5,
+    excerpt: 'Entender lo que dice el envase te ayuda a tomar mejores decisiones en el supermercado.',
+    body: ['Las etiquetas nutricionales pueden parecer complicadas, pero con unos pocos trucos es fácil entender lo más importante y elegir mejor en cada compra.',
+      'Fíjate primero en el tamaño de la porción: todos los valores se refieren a esa cantidad, no al envase completo. Luego revisa el azúcar añadido (idealmente menos de 5 g por porción), el sodio (menos de 600 mg) y las grasas saturadas.',
+      'Cuantos menos ingredientes tenga el producto, mejor. Si el azúcar o alguna grasa aparece entre los tres primeros ingredientes, hay mucho de eso. Elige productos con ingredientes que puedas reconocer fácilmente.'],
+    points: ['Revisa el tamaño de la porción primero', 'Menos de 5 g de azúcar añadido por porción', 'Ingredientes cortos y reconocibles, mejor'] },
+  { id: 'a2f', cat: 'nutricion', title: 'Recetas rápidas con pocos ingredientes', mins: 4,
+    excerpt: 'Cocinar no tiene que ser complicado. Estos platos se preparan en menos de veinte minutos.',
+    body: ['Comer bien no requiere pasar horas en la cocina. Con cuatro o cinco ingredientes básicos puedes preparar platos completos, sabrosos y nutritivos en muy poco tiempo.',
+      'Tortilla de verduras: huevo, cebolla, pimiento y una pizca de sal. Lista en diez minutos. Sopa de lentejas: lentejas de bote, caldo, zanahoria y comino. Lista en quince minutos y llena de fibra y proteína.',
+      'Mantén en casa: huevos, lentejas o garbanzos de bote, avena, arroz integral, aceite de oliva, ajo y tomate. Con esos siete básicos puedes preparar más de diez comidas diferentes.'],
+    points: ['La tortilla es rápida y nutritiva', 'Las legumbres de bote ahorran tiempo', 'Con siete básicos puedes comer bien toda la semana'] },
+  { id: 'a2g', cat: 'nutricion', title: 'Frutas y verduras: qué comer en cada temporada', mins: 4,
+    excerpt: 'Las frutas y verduras de temporada son más nutritivas, más sabrosas y cuestan menos.',
+    body: ['Comer frutas y verduras de temporada es uno de los hábitos más sencillos y beneficiosos que puedes adoptar. Son más frescas, tienen más nutrientes y generalmente cuestan menos.',
+      'En los meses fríos elige: naranja, mandarina, kiwi, col, brócoli, espinacas y zanahoria. En los meses cálidos: sandía, melocotón, ciruela, tomate, pimiento y calabacín.',
+      'Intenta que la mitad de tu plato sean verduras en cada comida. Si no tienes tiempo de cocinarlas, las ensaladas o las verduras al vapor son opciones rápidas y muy nutritivas.'],
+    points: ['La fruta de temporada tiene más vitaminas', 'Verduras en la mitad de tu plato', 'El mercado local es la mejor fuente de temporada'] },
+  { id: 'a2h', cat: 'nutricion', title: 'Reduce el azúcar sin perder el sabor', mins: 5,
+    excerpt: 'Pequeños cambios en tus hábitos te permiten disfrutar de lo que comes con mucho menos azúcar.',
+    body: ['El exceso de azúcar está relacionado con la diabetes, la inflamación y el aumento de peso. Reducirlo no significa dejar de disfrutar de la comida, sino aprender a saborearla de otra manera.',
+      'Empieza por lo fácil: reduce el azúcar del café o el té de forma gradual, semana a semana. Cambia los refrescos por agua con limón o infusiones. Lee las etiquetas: muchos alimentos salados como salsas o embutidos tienen azúcar oculta.',
+      'La fruta fresca es el mejor sustituto del dulce. Si necesitas endulzar algo, usa dátiles triturados, plátano maduro o una pequeña cantidad de miel. Tu paladar se adapta en pocas semanas.'],
+    points: ['Reduce el azúcar del café poco a poco', 'La fruta fresca satisface el antojo de dulce', 'Lee etiquetas: el azúcar se esconde en muchos productos'] },
+  // ---- ACTIVIDAD ----
   { id: 'a3', cat: 'actividad', title: 'Ejercicios suaves para mantenerte ágil', mins: 4,
     excerpt: 'Movimientos seguros que puedes hacer en casa, sentado o de pie.',
     body: ['Mantenerte en movimiento conserva tu fuerza y tu equilibrio. No hace falta ir al gimnasio: tu salón es suficiente.',
       'Empieza sentado: estira los brazos, gira los tobillos y levanta las rodillas con suavidad. Repite cada ejercicio diez veces.',
       'Si te sientes seguro, ponte de pie apoyado en una silla y haz pequeñas sentadillas. Para si notas dolor o mareo.'],
     points: ['Calienta sentado primero', 'Apóyate en una silla firme', 'Para si notas dolor o mareo'] },
+  { id: 'a3b', cat: 'actividad', title: 'Caminar: el mejor ejercicio para cada día', mins: 4,
+    excerpt: 'Sencillo, gratuito y con grandes beneficios para el cuerpo y la mente. Solo necesitas un buen par de zapatos.',
+    body: ['Caminar es el ejercicio más natural y accesible que existe. No necesita equipo, no tiene contraindicaciones para la mayoría y se puede hacer en cualquier momento y lugar.',
+      'Treinta minutos de caminata diaria reducen el riesgo cardiovascular, mejoran el equilibrio, fortalecen los huesos y elevan el ánimo. Si treinta minutos seguidos son mucho al principio, empieza con tres caminatas de diez minutos.',
+      'Para aprovechar al máximo: mantén la espalda recta, activa el abdomen y mueve los brazos con naturalidad. Usa calzado cómodo con buen soporte. Y si puedes, camina acompañado: el tiempo pasa más rápido.'],
+    points: ['Treinta minutos al día es suficiente para empezar', 'Puedes dividirlos en tres caminatas de diez', 'El calzado cómodo es tu inversión más importante'] },
+  { id: 'a3c', cat: 'actividad', title: 'Yoga suave: flexibilidad y paz a tu ritmo', mins: 5,
+    excerpt: 'El yoga adaptado a personas mayores mejora la flexibilidad, el equilibrio y reduce el estrés.',
+    body: ['El yoga no es solo para jóvenes ni para personas muy flexibles. Existe una versión suave, adaptada, que cualquier persona mayor puede practicar con beneficios reales y sin riesgo.',
+      'Con veinte minutos al día, el yoga suave mejora la flexibilidad de las articulaciones, fortalece los músculos posturales, mejora el equilibrio y calma la mente. También ayuda a dormir mejor y a reducir el dolor crónico de espalda o cuello.',
+      'No necesitas equipamiento especial: una esterilla o una manta en el suelo es suficiente. Empieza con clases en vídeo pensadas para mayores o busca un grupo local. Lo importante es escuchar al cuerpo y no forzar nunca.'],
+    points: ['Empieza con sesiones de veinte minutos', 'Nunca fuerces las posturas: respeta tu cuerpo', 'Busca clases adaptadas a personas mayores'] },
+  { id: 'a3d', cat: 'actividad', title: 'Ejercicios para una espalda sin dolor', mins: 5,
+    excerpt: 'El dolor de espalda es frecuente, pero con los ejercicios adecuados puedes reducirlo o eliminarlo.',
+    body: ['El dolor de espalda es uno de los motivos más frecuentes de consulta médica en personas mayores. En muchos casos mejora mucho con ejercicio específico y hábitos posturales correctos.',
+      'Estiramiento del gato-vaca: a cuatro patas, arquea la espalda hacia arriba y luego hacia abajo suavemente, diez veces. Fortalecimiento: tumbado boca arriba, lleva las rodillas al pecho y mantén diez segundos. Repite cinco veces.',
+      'En el día a día: siéntate con la espalda apoyada en el respaldo, sin cruzar las piernas. Al agacharte, dobla las rodillas en lugar de la espalda. Si el dolor irradia a las piernas, consulta a tu médico antes de empezar.'],
+    points: ['El estiramiento diario reduce el dolor', 'Siéntate con la espalda bien apoyada', 'Dobla las rodillas, no la espalda, al agacharte'] },
+  { id: 'a3e', cat: 'actividad', title: 'Baile: muévete y disfruta al mismo tiempo', mins: 4,
+    excerpt: 'Bailar es ejercicio, es alegría y es conexión social. Y es perfectamente válido hacerlo en el salón de tu casa.',
+    body: ['Bailar combina actividad física con estimulación mental y conexión emocional. Es uno de los ejercicios más completos y, desde luego, de los más divertidos.',
+      'Media hora de baile equivale a una caminata enérgica: trabaja el corazón, las piernas, el equilibrio y la coordinación. Además, aprender coreografías sencillas es un excelente ejercicio para la memoria.',
+      'No necesitas ir a clases si no quieres. Pon tu música favorita y muévete en casa. Empieza despacio y aumenta el ritmo según cómo te sientas. Si hay un club de baile en tu barrio, es una oportunidad perfecta para conocer gente nueva.'],
+    points: ['Treinta minutos de baile equivalen a una caminata', 'La música favorita es la mejor motivación', 'El baile también entrena la memoria'] },
+  { id: 'a3f', cat: 'actividad', title: 'Natación y aquagym: cuida tus articulaciones', mins: 5,
+    excerpt: 'El agua sostiene el cuerpo y permite moverse sin impacto, ideal para articulaciones delicadas.',
+    body: ['El ejercicio en el agua es uno de los más recomendados para personas mayores porque el agua sostiene el peso corporal, reduciendo enormemente el impacto sobre las articulaciones.',
+      'La natación trabaja todo el cuerpo: brazos, piernas, espalda y abdomen, mientras mejora la resistencia cardiovascular. El aquagym se practica en piscina poco profunda y no requiere saber nadar.',
+      'Treinta minutos en el agua tres veces por semana ya producen beneficios notables. Consulta los horarios de tu piscina más cercana; muchas tienen programas específicos para mayores con precio reducido.'],
+    points: ['El agua reduce el impacto en las articulaciones', 'El aquagym no requiere saber nadar', 'Tres sesiones semanales de treinta minutos son suficientes'] },
+  { id: 'a3g', cat: 'actividad', title: 'Tai chi: equilibrio, calma y salud en movimiento', mins: 4,
+    excerpt: 'Esta práctica milenaria mejora el equilibrio y reduce el estrés con movimientos lentos y seguros.',
+    body: ['El tai chi combina movimientos lentos y fluidos con respiración consciente y concentración mental. Es suave, seguro y sus beneficios están avalados por la ciencia.',
+      'Estudios demuestran que practicar tai chi regularmente reduce el riesgo de caídas en personas mayores hasta en un 45 %. También mejora la presión arterial, el equilibrio y el bienestar emocional.',
+      'Se puede practicar en grupo o solo, al aire libre o en casa. Una sesión típica dura entre veinte y cuarenta y cinco minutos. No requiere equipamiento y se puede adaptar para personas con movilidad reducida.'],
+    points: ['Reduce el riesgo de caídas un 45 %', 'Mejora el equilibrio y la presión arterial', 'Puedes practicarlo en casa o al aire libre'] },
+  { id: 'a3h', cat: 'actividad', title: 'Rutina de estiramiento para empezar bien el día', mins: 4,
+    excerpt: 'Cinco minutos de estiramiento al levantarte preparan el cuerpo y la mente para el día.',
+    body: ['Los primeros minutos del día son clave. Un estiramiento suave antes de levantarte de la cama activa la circulación, reduce la rigidez matinal y prepara el cuerpo para moverse sin dolor.',
+      'Antes de levantarte: estira los brazos por encima de la cabeza, lleva las rodillas al pecho y gira suavemente el tronco hacia cada lado. Una vez de pie: inclina la cabeza hacia los lados, haz círculos con los hombros y estira las pantorrillas.',
+      'Todo el proceso lleva cinco minutos. Hazlo cada mañana durante dos semanas y notarás la diferencia. Termina con tres respiraciones profundas: inhala cuatro tiempos, mantén dos, exhala seis.'],
+    points: ['Estira antes de levantarte de la cama', 'Cinco minutos diarios son suficientes', 'Termina con tres respiraciones profundas'] },
+  // ---- COMUNIDAD ----
   { id: 'a4', cat: 'comunidad', title: 'Encuentros de Vida Plena cerca de ti', mins: 3,
     excerpt: 'Conoce a otras personas, comparte y aprende en grupo. Esta semana hay tres encuentros.',
     body: ['Compartir con otras personas es tan importante para la salud como caminar o comer bien. La compañía nos cuida.',
       'Esta semana hay tres encuentros gratuitos: un paseo por el parque el martes, un taller de cocina el jueves y una charla de salud el sábado.',
       'Apúntate desde la aplicación o llámanos. Te guardamos un sitio y, si lo necesitas, te ayudamos con el transporte.'],
     points: ['Martes: paseo en el parque', 'Jueves: taller de cocina', 'Sábado: charla de salud'] },
+  { id: 'a4b', cat: 'comunidad', title: 'Mantente conectado con tu familia a distancia', mins: 5,
+    excerpt: 'La tecnología hace que la distancia no sea un obstáculo para sentirte cerca de los tuyos.',
+    body: ['La distancia física no tiene por qué significar distancia emocional. Con herramientas sencillas y una conexión a internet, puedes ver, escuchar y compartir momentos con tu familia en cualquier parte del mundo.',
+      'Las videollamadas son la opción más cercana a estar en persona. WhatsApp, FaceTime o Zoom funcionan bien y son gratuitas. Si necesitas ayuda para configurarlas, en Vida Plena podemos orientarte paso a paso.',
+      'Establece una hora fija cada semana para llamar: la rutina hace que todos lo recuerden y esperen. Comparte fotos, cuenta lo que has hecho, pregunta por los más jóvenes. La conexión regular mantiene vivo el vínculo.'],
+    points: ['Las videollamadas son gratis y fáciles de usar', 'Fija un día y hora para llamar cada semana', 'Compartir fotos acorta la distancia'] },
+  { id: 'a4c', cat: 'comunidad', title: 'Voluntariado: da y recibe al mismo tiempo', mins: 5,
+    excerpt: 'Ayudar a otros es también cuidarse a uno mismo. El voluntariado tiene beneficios reales para la salud.',
+    body: ['Las personas que hacen voluntariado viven más tiempo, tienen menor riesgo de depresión y reportan mayor satisfacción con su vida. Es el efecto del propósito, la conexión y la generosidad.',
+      'Hay opciones para todos los perfiles: acompañar a personas mayores que viven solas, apoyar en comedores comunitarios, colaborar con asociaciones de animales o participar en grupos de lectura para niños.',
+      'Empieza con pocas horas a la semana, las que puedas dar sin esfuerzo. Lo importante no es cuánto tiempo, sino la regularidad y el compromiso. Contacta con tu ayuntamiento o asociación local para conocer las opciones.'],
+    points: ['Empieza con pocas horas semanales', 'El voluntariado reduce el riesgo de depresión', 'Pregunta en tu ayuntamiento por las opciones'] },
+  { id: 'a4d', cat: 'comunidad', title: 'Grupos de lectura: aprender y conversar juntos', mins: 4,
+    excerpt: 'Compartir un libro o una idea en grupo estimula la mente y crea amistades genuinas.',
+    body: ['Los grupos de lectura son mucho más que leer en común. Son espacios donde las personas comparten perspectivas, aprenden unas de otras y disfrutan de conversación real en un entorno de respeto y escucha.',
+      'Participar en un club de lectura mejora la memoria, amplía el vocabulario y mantiene la mente activa. Pero el beneficio más valorado suele ser otro: la compañía y el sentido de pertenencia.',
+      'Muchas bibliotecas y centros comunitarios tienen clubes de lectura gratuitos. Si no encuentras uno cerca, puedes crear el tuyo con vecinos o amigos: basta escoger un libro, fijar una fecha y reunirse a comentarlo.'],
+    points: ['Las bibliotecas suelen tener clubes gratuitos', 'Un club de lectura también es un espacio social', 'Puedes crear el tuyo con vecinos o amigos'] },
+  { id: 'a4e', cat: 'comunidad', title: 'Huertos comunitarios: cultiva salud y amistad', mins: 4,
+    excerpt: 'Cuidar un huerto junto a otras personas es ejercicio, terapia y conexión al mismo tiempo.',
+    body: ['Los huertos comunitarios son espacios donde vecinos comparten tierra, herramientas y conocimientos para cultivar frutas, verduras y plantas. Son también un ejemplo de cómo la comunidad cuida la salud.',
+      'Participar implica actividad física moderada al aire libre, contacto con la naturaleza, aprendizaje continuo y, sobre todo, compartir. El proceso de plantar, cuidar y cosechar juntos crea vínculos genuinos.',
+      'Pregunta en tu ayuntamiento o parque más cercano si hay un huerto comunitario activo. Muchos buscan voluntarios sin experiencia previa. Si no existe en tu zona, quizá es el momento de proponérselo a los vecinos.'],
+    points: ['Ejercicio al aire libre y contacto con la naturaleza', 'No se necesita experiencia previa', 'Pregunta en tu ayuntamiento si hay huertos cerca'] },
+  { id: 'a4f', cat: 'comunidad', title: 'Cómo hacer nuevos amigos después de los 60', mins: 5,
+    excerpt: 'La amistad no tiene edad. Con los pasos correctos, es posible construir nuevas conexiones en cualquier momento.',
+    body: ['Hacer amigos de adulto puede parecer difícil, pero no es imposible. Muchas personas mayores reportan que las amistades construidas en esta etapa son las más honestas y profundas de su vida.',
+      'La clave está en la regularidad: las amistades se construyen con encuentros repetidos en el tiempo, no en una sola conversación. Por eso los grupos, talleres y actividades regulares son el mejor lugar para empezar.',
+      'Muéstrate abierto, haz preguntas con interés genuino y propón un siguiente encuentro cuando la conversación fluya bien. No hay que esperar que el otro dé el primer paso. Una invitación a tomar un café puede ser el inicio de una amistad de años.'],
+    points: ['La regularidad es clave para construir amistad', 'Los grupos y talleres son el mejor punto de partida', 'No esperes que el otro dé el primer paso'] },
+  { id: 'a4g', cat: 'comunidad', title: 'Tecnología para conectar: más fácil de lo que parece', mins: 5,
+    excerpt: 'Aprender a usar el teléfono o la tablet para conectar con otros abre un mundo de posibilidades.',
+    body: ['La tecnología no es cosa de jóvenes. Cada vez más personas mayores usan el móvil o la tablet no solo para llamar, sino para mantenerse informadas, entretenidas y conectadas con quienes quieren.',
+      'No hace falta aprenderlo todo de golpe. Empieza por una sola aplicación: WhatsApp para mensajes y fotos, o YouTube para ver vídeos de temas que te interesan. Una vez que la manejas con soltura, añade la siguiente.',
+      'Busca talleres de alfabetización digital en tu biblioteca, centro de mayores o ayuntamiento. Son gratuitos, van a tu ritmo y estarás rodeado de personas con las mismas dudas. En Vida Plena también podemos orientarte.'],
+    points: ['Empieza con una sola aplicación a la vez', 'Los talleres digitales gratuitos son un gran punto de partida', 'No tengas miedo de preguntar y equivocarte'] },
+  { id: 'a4h', cat: 'comunidad', title: 'Tu centro comunitario: un recurso que vale la pena conocer', mins: 4,
+    excerpt: 'Los centros de mayores ofrecen actividades, compañía y servicios que muchas personas no saben que existen.',
+    body: ['Los centros comunitarios y de mayores son uno de los recursos más valiosos y menos aprovechados. Ofrecen actividades físicas, culturales y de ocio, muchas de ellas gratuitas o a muy bajo coste.',
+      'En la mayoría encontrarás: clases de gimnasia o yoga adaptado, talleres de manualidades o pintura, grupos de baile, aulas de informática, charlas de salud y espacios para jugar al dominó o a las cartas en compañía.',
+      'Si nunca has ido, la primera vez puede dar algo de reparo. Lleva a un amigo o vecino la primera visita. Una vez dentro, casi siempre se descubre que merece la pena haberlo intentado.'],
+    points: ['Muchas actividades son gratuitas o de bajo coste', 'Lleva a alguien contigo la primera vez', 'Pregunta por la agenda mensual al entrar'] },
 ];
 
 const TIP = 'Bebe un vaso de agua al despertar. Tu cuerpo lo agradece después de toda la noche.';
@@ -269,7 +441,7 @@ function Topbar({ go, scale, setScale, bp, speak, speakingId, onVoicePicker }) {
         {!compact ? (
           <nav style={{ display: 'flex', gap: 6, marginLeft: 8 }}>
             {Object.entries(CATS).map(([id, c]) => (
-              <a key={id} onClick={() => go('home')} style={{ cursor: 'pointer', fontSize: 18, fontWeight: 600, color: 'var(--text-body)', padding: '8px 14px', borderRadius: 'var(--radius-sm)' }}>{c.label}</a>
+              <a key={id} onClick={() => go('category', id)} style={{ cursor: 'pointer', fontSize: 18, fontWeight: 600, color: 'var(--text-body)', padding: '8px 14px', borderRadius: 'var(--radius-sm)' }}>{c.label}</a>
             ))}
           </nav>
         ) : null}
@@ -282,13 +454,12 @@ function Topbar({ go, scale, setScale, bp, speak, speakingId, onVoicePicker }) {
             <CIcon path={ci.mic} size={20} />
             {bp !== 'mobile' && <span>Voz</span>}
           </button>
-          {bp !== 'mobile' ? <Avatar name="Carmen Ruiz" size={compact ? 42 : 46} ring /> : null}
         </div>
       </div>
       {compact ? (
         <div style={{ display: 'flex', gap: 8, overflowX: 'auto', padding: '0 18px 12px', WebkitOverflowScrolling: 'touch' }}>
           {Object.entries(CATS).map(([id, c]) => (
-            <button key={id} onClick={() => go('home')} style={{ flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 16px', borderRadius: 'var(--radius-full)', border: '1px solid var(--border-default)', background: 'var(--surface-card)', cursor: 'pointer', fontSize: 16, fontWeight: 600, color: 'var(--text-body)' }}>
+            <button key={id} onClick={() => go('category', id)} style={{ flexShrink: 0, display: 'inline-flex', alignItems: 'center', gap: 8, padding: '9px 16px', borderRadius: 'var(--radius-full)', border: '1px solid var(--border-default)', background: 'var(--surface-card)', cursor: 'pointer', fontSize: 16, fontWeight: 600, color: 'var(--text-body)' }}>
               <span style={{ width: 10, height: 10, borderRadius: '50%', background: c.tone }} />{c.label}
             </button>
           ))}
@@ -315,13 +486,11 @@ function ArticleCard({ a, go, big, bp, speak, speakingId }) {
           </span>
         </div>
         <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: big ? s.featTitle : s.cardTitle, lineHeight: 1.15, margin: '0 0 10px', color: 'var(--text-strong)' }}>{a.title}</h3>
-        <p style={{ margin: 0, fontSize: big ? s.featExc : s.cardExc, color: 'var(--text-body)', lineHeight: 1.6 }}>{a.excerpt}</p>
-        {big ? (
-          <div style={{ display: 'flex', gap: 12, marginTop: 22, flexWrap: 'wrap' }} onClick={(e) => e.stopPropagation()}>
-            <Button variant="primary" size="lg" iconRight={<CIcon path={ci.arrow} size={20} />} onClick={() => go('article', a)}>Leer artículo</Button>
-            <Listen id={'feat-' + a.id} text={articleSpeech(a)} speak={speak} speakingId={speakingId} />
-          </div>
-        ) : null}
+        <p style={{ margin: '0 0 16px', fontSize: big ? s.featExc : s.cardExc, color: 'var(--text-body)', lineHeight: 1.6 }}>{a.excerpt}</p>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }} onClick={(e) => e.stopPropagation()}>
+          <Button variant="primary" size={big ? 'lg' : 'md'} iconRight={<CIcon path={ci.arrow} size={big ? 20 : 18} />} onClick={() => go('article', a)}>Leer artículo</Button>
+          <Listen id={(big ? 'feat-' : 'card-') + a.id} text={articleSpeech(a)} speak={speak} speakingId={speakingId} size={big ? 'lg' : 'md'} />
+        </div>
       </div>
     </Card>
   );
@@ -330,15 +499,15 @@ function ArticleCard({ a, go, big, bp, speak, speakingId }) {
 /* ---------- home ---------- */
 function Home({ go, bp, speak, speakingId }) {
   const s = SZ[bp];
-  const featured = ARTICLES[0];
-  const rest = ARTICLES.slice(1);
+  const featured = ARTICLES.find(a => a.cat === 'salud');
+  const rest = ['nutricion', 'actividad', 'comunidad'].map(cat => ARTICLES.find(a => a.cat === cat));
   const heroCols = bp === 'desktop' ? '1.6fr 1fr' : '1fr';
   const sideRow = bp === 'tablet' ? 'repeat(2,1fr)' : '1fr';
   const todayCols = bp === 'mobile' ? '1fr' : bp === 'tablet' ? 'repeat(2,1fr)' : 'repeat(3,1fr)';
   return (
     <div style={{ maxWidth: s.max, margin: '0 auto', padding: `${s.pad + 12}px ${s.pad}px ${s.pad + 48}px` }}>
       <div style={{ marginBottom: 24 }}>
-        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: s.greet, margin: '0 0 6px', color: 'var(--text-strong)' }}>Hola, Carmen</h1>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: s.greet, margin: '0 0 6px', color: 'var(--text-strong)' }}>Hola</h1>
         <p style={{ fontSize: s.lead, color: 'var(--text-body)', margin: 0 }}>Información clara para vivir con vitalidad cada día.</p>
       </div>
 
@@ -414,6 +583,38 @@ function Article({ article, go, bp, scale, speak, speakingId }) {
           </Card>
         </div>
       </article>
+    </div>
+  );
+}
+
+/* ---------- category page ---------- */
+function CategoryPage({ cat, go, bp, speak, speakingId }) {
+  const s = SZ[bp];
+  const c = CATS[cat];
+  const articles = ARTICLES.filter(a => a.cat === cat);
+  const cols = bp === 'mobile' ? '1fr' : 'repeat(2, 1fr)';
+  return (
+    <div style={{ maxWidth: s.max, margin: '0 auto', padding: `${s.pad + 12}px ${s.pad}px ${s.pad + 48}px` }}>
+      <button onClick={() => go('home')} aria-label="Volver al inicio"
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 28,
+          padding: '10px 18px', borderRadius: 'var(--radius-full)', border: '1.5px solid var(--border-default)',
+          background: 'var(--surface-card)', cursor: 'pointer',
+          fontFamily: 'var(--font-sans)', fontWeight: 700, fontSize: 16, color: 'var(--text-body)' }}>
+        <CIcon path={ci.back} size={20} /> Inicio
+      </button>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 18, marginBottom: 32 }}>
+        <span style={{ width: 64, height: 64, borderRadius: 18, background: c.tone,
+          display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0 }}>
+          <CIcon path={ci[c.icon]} size={32} stroke={1.6} />
+        </span>
+        <div>
+          <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: s.greet, margin: 0, color: 'var(--text-strong)' }}>{c.label}</h1>
+          <p style={{ fontSize: s.lead, color: 'var(--text-body)', margin: '4px 0 0' }}>{articles.length} artículos para ti</p>
+        </div>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: cols, gap: s.gap }}>
+        {articles.map(a => <ArticleCard key={a.id} a={a} go={go} bp={bp} speak={speak} speakingId={speakingId} />)}
+      </div>
     </div>
   );
 }
@@ -513,23 +714,7 @@ function Footer({ bp }) {
             <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.55)', margin: '0 0 14px' }}>
               Vida Plena Conecta, operado por <strong style={{ color: 'rgba(255,255,255,0.8)' }}>MAYAM</strong>, trata tus datos personales con apego a la <a href="./AvisoDePrivacidad-VidaPlena.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 700, textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.4)', textDecorationThickness: '2px', textUnderlineOffset: '4px' }}>Ley Federal de Protección de Datos Personales en Posesión de los Particulares</a>.
             </p>
-            <p style={{ fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 12px' }}>Tus derechos ARCO</p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px 16px', marginBottom: 18 }}>
-              {[
-                ['A', 'Acceso',        'Conoce qué datos guardamos sobre ti'],
-                ['R', 'Rectificación', 'Corrige datos inexactos o incompletos'],
-                ['C', 'Cancelación',   'Solicita la eliminación de tus datos'],
-                ['O', 'Oposición',     'Limita el uso de tu información'],
-              ].map(([letter, name, desc]) => (
-                <div key={letter} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                  <span style={{ width: 26, height: 26, borderRadius: 8, background: 'rgba(255,255,255,0.1)', display: 'grid', placeItems: 'center', fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.9)', flexShrink: 0, marginTop: 1 }}>{letter}</span>
-                  <div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.75)', marginBottom: 2 }}>{name}</div>
-                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{desc}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            
           </div>
         </div>
 
@@ -543,4 +728,4 @@ function Footer({ bp }) {
   );
 }
 
-Object.assign(window, { Home, Article, Topbar, VoicePicker, useBreakpoint, SCALE_LIMITS, selectVoices, SPEECH_RATES, AboutSection, Footer });
+Object.assign(window, { Home, Article, Topbar, VoicePicker, useBreakpoint, SCALE_LIMITS, selectVoices, SPEECH_RATES, AboutSection, Footer, CategoryPage });

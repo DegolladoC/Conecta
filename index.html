@@ -29,6 +29,7 @@
       const v = parseFloat(localStorage.getItem('vp-conecta-scale'));
       return isNaN(v) ? 1 : v;
     });
+    const [category, setCategory] = React.useState(null);
     const [speakingId, setSpeakingId] = React.useState(null);
     const [availableVoices, setAvailableVoices] = React.useState([]);
     const [selectedVoiceName, setSelectedVoiceName] = React.useState(() => localStorage.getItem('vp-conecta-voice') || '');
@@ -88,7 +89,7 @@
       synth.speak(u); setSpeakingId(id);
     };
 
-    const go = (r, payload) => { stopSpeech(); if (payload) setArticle(payload); setRoute(r); const el = document.getElementById('scroll'); if (el) el.scrollTop = 0; };
+    const go = (r, payload) => { stopSpeech(); if (r === 'article') setArticle(payload); if (r === 'category') setCategory(payload); setRoute(r); const el = document.getElementById('scroll'); if (el) el.scrollTop = 0; };
 
     return (
       <div id="scroll">
@@ -97,13 +98,14 @@
         <main style={{ zoom: scale }}>
           {route === 'home' && <Home go={go} bp={bp} speak={speak} speakingId={speakingId} />}
           {route === 'article' && <Article article={article} go={go} bp={bp} scale={1} speak={speak} speakingId={speakingId} />}
+          {route === 'category' && <CategoryPage cat={category} go={go} bp={bp} speak={speak} speakingId={speakingId} />}
         </main>
         <Footer bp={bp} />
         {voicePickerOpen && <VoicePicker availableVoices={availableVoices} selectedVoiceName={selectedVoiceName} setSelectedVoiceName={setSelectedVoiceName} speechRate={speechRate} setSpeechRate={setSpeechRate} onClose={() => setVoicePickerOpen(false)} />}
       </div>
     );
   }
-  function mount(){ if (!window.Home || !window.Article || !window.Topbar || !window.VoicePicker || !window.useBreakpoint || !window.AboutSection || !window.Footer) return setTimeout(mount, 30); ReactDOM.createRoot(document.getElementById('root')).render(<App/>); }
+  function mount(){ if (!window.Home || !window.Article || !window.Topbar || !window.VoicePicker || !window.useBreakpoint || !window.AboutSection || !window.Footer || !window.CategoryPage) return setTimeout(mount, 30); ReactDOM.createRoot(document.getElementById('root')).render(<App/>); }
   mount();
 </script>
 </body>
