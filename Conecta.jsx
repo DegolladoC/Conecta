@@ -173,24 +173,6 @@ function VoicePicker({ availableVoices, selectedVoiceName, setSelectedVoiceName,
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 28, margin: 0, color: 'var(--text-strong)' }}>Elige una voz</h2>
           <button onClick={onClose} aria-label="Cerrar" style={{ width: 44, height: 44, borderRadius: '50%', border: 0, background: 'var(--surface-page)', cursor: 'pointer', fontSize: 22, color: 'var(--text-body)', display: 'grid', placeItems: 'center' }}>✕</button>
         </div>
-        <div style={{ marginBottom: 28 }}>
-          <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 10px' }}>Velocidad de lectura</p>
-          <div style={{ display: 'flex', gap: 8 }}>
-            {SPEECH_RATES.map(sr => {
-              const sel = speechRate === sr.rate;
-              return (
-                <button key={sr.rate} onClick={() => setSpeechRate(sr.rate)} aria-label={sr.label} aria-pressed={sel}
-                  style={{ flex: 1, padding: '11px 4px', borderRadius: 12,
-                    border: `${sel ? '2.5px' : '1.5px'} solid ${sel ? 'var(--pine-700)' : 'var(--border-default)'}`,
-                    background: sel ? 'rgba(44,92,60,0.07)' : 'var(--surface-page)',
-                    cursor: 'pointer', fontSize: 15, fontWeight: sel ? 700 : 500,
-                    color: sel ? 'var(--pine-700)' : 'var(--text-body)', fontFamily: 'var(--font-sans)' }}>
-                  {sr.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
         {availableVoices.length === 0 ? (
           <p style={{ fontSize: 18, color: 'var(--text-body)', lineHeight: 1.6 }}>No se encontraron voces en español en este dispositivo.</p>
         ) : groups.map(g => (
@@ -225,6 +207,38 @@ function VoicePicker({ availableVoices, selectedVoiceName, setSelectedVoiceName,
             </div>
           </div>
         ))}
+        <div style={{ borderTop: '1px solid var(--border-subtle)', marginTop: 24, paddingTop: 22 }}>
+          <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 14px', textAlign: 'center' }}>Velocidad de lectura</p>
+          <div style={{ display: 'flex', gap: 8 }}>
+            {SPEECH_RATES.map((sr, i) => {
+              const sel = speechRate === sr.rate;
+              const barColor = sel ? 'var(--pine-700)' : 'var(--border-default)';
+              return (
+                <button key={sr.rate} onClick={() => setSpeechRate(sr.rate)} aria-label={sr.label} aria-pressed={sel}
+                  style={{ flex: 1, padding: '12px 6px 10px', borderRadius: 12,
+                    border: `${sel ? '2.5px' : '1.5px'} solid ${sel ? 'var(--pine-700)' : 'var(--border-default)'}`,
+                    background: sel ? 'rgba(44,92,60,0.07)' : 'var(--surface-page)',
+                    cursor: 'pointer', fontFamily: 'var(--font-sans)',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                  <div style={{ display: 'flex', gap: 3, alignItems: 'flex-end', height: 20 }}>
+                    {Array.from({ length: i + 1 }).map((_, j) => (
+                      <div key={j} style={{ width: 5, borderRadius: 2, height: 5 + j * 4, background: barColor }} />
+                    ))}
+                  </div>
+                  <span style={{ fontSize: 14, fontWeight: sel ? 700 : 500, color: sel ? 'var(--pine-700)' : 'var(--text-body)' }}>{sr.label}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 10 }}>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 13, color: 'var(--text-muted)' }}>
+              <CIcon path={ci.back} size={14} stroke={2.5} /> Más lento
+            </span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, fontSize: 13, color: 'var(--text-muted)' }}>
+              Más rápido <CIcon path={ci.arrow} size={14} stroke={2.5} />
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );
