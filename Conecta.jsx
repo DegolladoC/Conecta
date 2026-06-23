@@ -641,7 +641,7 @@ function MayamLogo({ height = 36, onDark = false }) {
 }
 
 /* ---------- about section ---------- */
-function AboutSection({ bp }) {
+function AboutSection({ bp, speak, speakingId }) {
   const s = SZ[bp];
   const pillars = [
     { icon: 'users', color: 'var(--sky)',      bg: 'var(--sky-soft)',
@@ -654,17 +654,39 @@ function AboutSection({ bp }) {
       title: 'Vitalidad a tu ritmo',
       text: 'Pequeños hábitos, grandes cambios. Te acompañamos con contenido práctico para vivir cada día con más energía y bienestar.' },
   ];
+  const aboutText = [
+    'Quiénes somos. Un espacio hecho con propósito, pensado para quienes más experiencia tienen.',
+    'Vida Plena Conecta nació de la convicción de que las personas mayores merecen acceso fácil, claro y digno a la información que necesitan para cuidarse, mantenerse activas y seguir disfrutando la vida. Porque la experiencia no caduca: florece.',
+    ...pillars.map(p => `${p.title}. ${p.text}`),
+    'Envejecer con dignidad no es un privilegio, es un derecho que construimos juntos, cada día, con información, comunidad y amor. — Equipo Vida Plena',
+  ].join(' ');
+  const isDesktop = bp === 'desktop';
   return (
     <section style={{ background: 'var(--surface-sunken)', borderTop: '1px solid var(--border-subtle)' }}>
       <div style={{ maxWidth: s.max, margin: '0 auto', padding: `${s.pad + 32}px ${s.pad}px ${s.pad + 40}px` }}>
-        <div style={{ maxWidth: 680, marginBottom: s.pad + 16 }}>
-          <Eyebrow tone="accent">Quiénes somos</Eyebrow>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: Math.round(s.artTitle * 0.78), lineHeight: 1.15, margin: '14px 0 18px', color: 'var(--text-strong)' }}>
-            Un espacio hecho con propósito, pensado para quienes más experiencia tienen
-          </h2>
-          <p style={{ fontSize: s.lead, color: 'var(--text-body)', lineHeight: 1.75, margin: 0 }}>
-            Vida Plena Conecta nació de la convicción de que las personas mayores merecen acceso fácil, claro y digno a la información que necesitan para cuidarse, mantenerse activas y seguir disfrutando la vida. Porque la experiencia no caduca: florece.
-          </p>
+        <div style={{ display: 'flex', flexDirection: isDesktop ? 'row' : 'column', alignItems: isDesktop ? 'center' : 'stretch', gap: s.gap, marginBottom: s.pad + 16 }}>
+          <div style={{ flex: isDesktop ? 1 : undefined, maxWidth: 680 }}>
+            <p style={{ fontSize: s.lead, fontWeight: 350, color: 'var(--gold-600)', textTransform: 'uppercase', letterSpacing: '0.1em', margin: '0 0 14px' }}>Quiénes somos</p>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: Math.round(s.artTitle * 0.78), lineHeight: 1.15, margin: '14px 0 18px', color: 'var(--text-strong)' }}>
+              Un espacio hecho con propósito, pensado para quienes más experiencia tienen
+            </h2>
+            <p style={{ fontSize: s.lead, color: 'var(--text-body)', lineHeight: 1.75, margin: 0 }}>
+              Vida Plena Conecta nació de la convicción de que las personas mayores merecen acceso fácil, claro y digno a la información que necesitan para cuidarse, mantenerse activas y seguir disfrutando la vida. Porque la experiencia no caduca: florece.
+            </p>
+          </div>
+          {speak && (
+            <div style={{
+              flexShrink: 0,
+              marginLeft: isDesktop ? s.gap : 0,
+              padding: '24px',
+              borderRadius: 22,
+              background: 'var(--surface-card)',
+              border: '1.5px solid var(--border-subtle)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.07)',
+            }}>
+              <Listen id="about-section" text={aboutText} speak={speak} speakingId={speakingId} label="Escuchar sección" size="lg" variant="accent" />
+            </div>
+          )}
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: bp === 'mobile' ? '1fr' : 'repeat(3, 1fr)', gap: s.gap }}>
