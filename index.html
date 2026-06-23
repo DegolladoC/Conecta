@@ -97,11 +97,13 @@
           {route === 'home' && <Home go={go} bp={bp} speak={speak} speakingId={speakingId} />}
           {route === 'article' && <Article article={article} go={go} bp={bp} scale={1} speak={speak} speakingId={speakingId} />}
         </main>
+        {route === 'home' && <AboutSection bp={bp} />}
+        <Footer bp={bp} />
         {voicePickerOpen && <VoicePicker availableVoices={availableVoices} selectedVoiceName={selectedVoiceName} setSelectedVoiceName={setSelectedVoiceName} speechRate={speechRate} setSpeechRate={setSpeechRate} onClose={() => setVoicePickerOpen(false)} />}
       </div>
     );
   }
-  function mount(){ if (!window.Home || !window.Article || !window.Topbar || !window.VoicePicker || !window.useBreakpoint) return setTimeout(mount, 30); ReactDOM.createRoot(document.getElementById('root')).render(<App/>); }
+  function mount(){ if (!window.Home || !window.Article || !window.Topbar || !window.VoicePicker || !window.useBreakpoint || !window.AboutSection || !window.Footer) return setTimeout(mount, 30); ReactDOM.createRoot(document.getElementById('root')).render(<App/>); }
   mount();
 </script>
 </body>

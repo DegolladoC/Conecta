@@ -418,4 +418,129 @@ function Article({ article, go, bp, scale, speak, speakingId }) {
   );
 }
 
-Object.assign(window, { Home, Article, Topbar, VoicePicker, useBreakpoint, SCALE_LIMITS, selectVoices, SPEECH_RATES });
+/* ---------- mayam logo ---------- */
+function MayamLogo({ height = 36, onDark = false }) {
+  const gray = onDark ? 'rgba(255,255,255,0.82)' : '#4a4f5a';
+  const blue = onDark ? '#7fb3f5' : '#2b68d4';
+  const w = Math.round(height * 3.6);
+  return (
+    <svg width={w} height={height} viewBox="0 0 180 50" xmlns="http://www.w3.org/2000/svg" aria-label="MAYAM — Todo es posible">
+      <text x="90" y="33" textAnchor="middle"
+        fontFamily="'Century Gothic','Gill Sans MT','Gill Sans',Futura,'Trebuchet MS',sans-serif"
+        fontSize="32" fontWeight="300" letterSpacing="6" fill={gray}>
+        MA<tspan fill={blue}>Y</tspan>AM
+      </text>
+      <text x="90" y="48" textAnchor="middle"
+        fontFamily="'Century Gothic','Gill Sans MT','Gill Sans',Futura,'Trebuchet MS',sans-serif"
+        fontSize="9.5" fontWeight="400" letterSpacing="5.5" fill={blue}>
+        TODO ES POSIBLE
+      </text>
+    </svg>
+  );
+}
+
+/* ---------- about section ---------- */
+function AboutSection({ bp }) {
+  const s = SZ[bp];
+  const pillars = [
+    { icon: 'users', color: 'var(--sky)',      bg: 'var(--sky-soft)',
+      title: 'Comunidad que cuida',
+      text: 'Nadie debería enfrentar la vejez en soledad. Aquí encontrarás información, encuentros y una red que camina contigo.' },
+    { icon: 'heart', color: 'var(--pine-700)', bg: 'var(--pine-50)',
+      title: 'Dignidad sin límites',
+      text: 'Toda persona, sin importar su edad, merece acceder a información clara, útil y presentada con el respeto que merece.' },
+    { icon: 'leaf',  color: 'var(--leaf)',     bg: 'var(--leaf-soft)',
+      title: 'Vitalidad a tu ritmo',
+      text: 'Pequeños hábitos, grandes cambios. Te acompañamos con contenido práctico para vivir cada día con más energía y bienestar.' },
+  ];
+  return (
+    <section style={{ background: 'var(--surface-sunken)', borderTop: '1px solid var(--border-subtle)' }}>
+      <div style={{ maxWidth: s.max, margin: '0 auto', padding: `${s.pad + 32}px ${s.pad}px ${s.pad + 40}px` }}>
+        <div style={{ maxWidth: 680, marginBottom: s.pad + 16 }}>
+          <Eyebrow tone="accent">Quiénes somos</Eyebrow>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: Math.round(s.artTitle * 0.78), lineHeight: 1.15, margin: '14px 0 18px', color: 'var(--text-strong)' }}>
+            Un espacio hecho con propósito, pensado para quienes más experiencia tienen
+          </h2>
+          <p style={{ fontSize: s.lead, color: 'var(--text-body)', lineHeight: 1.75, margin: 0 }}>
+            Vida Plena Conecta nació de la convicción de que las personas mayores merecen acceso fácil, claro y digno a la información que necesitan para cuidarse, mantenerse activas y seguir disfrutando la vida. Porque la experiencia no caduca: florece.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: bp === 'mobile' ? '1fr' : 'repeat(3, 1fr)', gap: s.gap }}>
+          {pillars.map(p => (
+            <div key={p.title} style={{ background: 'var(--surface-card)', borderRadius: 18, padding: '28px 24px', border: '1px solid var(--border-subtle)', display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <span style={{ display: 'inline-flex', width: 54, height: 54, borderRadius: 14, background: p.bg, color: p.color, alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <CIcon path={ci[p.icon]} size={28} stroke={1.6} />
+              </span>
+              <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: s.cardTitle, margin: 0, color: 'var(--text-strong)' }}>{p.title}</h3>
+              <p style={{ fontSize: s.cardExc + 1, color: 'var(--text-body)', lineHeight: 1.65, margin: 0 }}>{p.text}</p>
+            </div>
+          ))}
+        </div>
+
+        <blockquote style={{ margin: `${s.pad + 8}px 0 0`, borderLeft: '4px solid var(--gold-500)', paddingLeft: 28, fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: s.tip, fontWeight: 500, color: 'var(--pine-700)', lineHeight: 1.5 }}>
+          "Envejecer con dignidad no es un privilegio, es un derecho que construimos juntos, cada día, con información, comunidad y amor."
+          <span style={{ display: 'block', marginTop: 10, fontStyle: 'normal', fontSize: Math.round(s.tip * 0.65), fontWeight: 600, color: 'var(--text-muted)' }}>— Equipo Vida Plena</span>
+        </blockquote>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- footer ---------- */
+function Footer({ bp }) {
+  const s = SZ[bp];
+  return (
+    <footer>
+      <div style={{ background: 'var(--pine-800)', color: 'rgba(255,255,255,0.85)' }}>
+        <div style={{ maxWidth: 1120, margin: '0 auto', padding: `${s.pad + 16}px ${s.pad}px ${s.pad + 8}px`, display: 'grid', gridTemplateColumns: bp !== 'mobile' ? '1fr 1fr' : '1fr', gap: s.gap + 12, alignItems: 'start' }}>
+          <div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+              <img src="./assets/logo-mark-transparent.png" alt="Vida Plena" style={{ height: 44 }} />
+              <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 24, color: 'var(--sand-100)' }}>Vida Plena</span>
+            </div>
+            <p style={{ fontSize: 15, lineHeight: 1.7, color: 'rgba(255,255,255,0.55)', margin: '0 0 24px', maxWidth: 320 }}>
+              Bienestar para toda la vida. Información accesible, comunidad activa y cuidado a tu medida.
+            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.08em' }}>DESARROLLADO POR</span>
+              <MayamLogo height={30} onDark />
+            </div>
+          </div>
+
+          <div style={{ borderLeft: bp !== 'mobile' ? '1px solid rgba(255,255,255,0.1)' : 'none', paddingLeft: bp !== 'mobile' ? s.gap + 12 : 0, borderTop: bp === 'mobile' ? '1px solid rgba(255,255,255,0.1)' : 'none', paddingTop: bp === 'mobile' ? 24 : 0 }}>
+            <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: 18, margin: '0 0 12px', color: 'rgba(255,255,255,0.9)' }}>Aviso de Privacidad</h3>
+            <p style={{ fontSize: 14, lineHeight: 1.75, color: 'rgba(255,255,255,0.55)', margin: '0 0 14px' }}>
+              Vida Plena Conecta, operado por <strong style={{ color: 'rgba(255,255,255,0.8)' }}>MAYAM</strong>, trata tus datos personales con apego a la <a href="https://www.gob.mx/cms/uploads/attachment/file/242002/Aviso_de_Privacidad_Integral_para_las_solicitudes_de_ejercicio_de_derechos_ARCO_ante_la_CONSAR.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,255,255,0.8)', fontWeight: 700, textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.4)', textDecorationThickness: '2px', textUnderlineOffset: '4px' }}>Ley Federal de Protección de Datos Personales en Posesión de los Particulares</a>.
+            </p>
+            <p style={{ fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '0.07em', margin: '0 0 12px' }}>Tus derechos ARCO</p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px 16px', marginBottom: 18 }}>
+              {[
+                ['A', 'Acceso',        'Conoce qué datos guardamos sobre ti'],
+                ['R', 'Rectificación', 'Corrige datos inexactos o incompletos'],
+                ['C', 'Cancelación',   'Solicita la eliminación de tus datos'],
+                ['O', 'Oposición',     'Limita el uso de tu información'],
+              ].map(([letter, name, desc]) => (
+                <div key={letter} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                  <span style={{ width: 26, height: 26, borderRadius: 8, background: 'rgba(255,255,255,0.1)', display: 'grid', placeItems: 'center', fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.9)', flexShrink: 0, marginTop: 1 }}>{letter}</span>
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.75)', marginBottom: 2 }}>{name}</div>
+                    <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>{desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: `14px ${s.pad}px`, textAlign: 'center' }}>
+          <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)' }}>
+            © {new Date().getFullYear()} MAYAM · Vida Plena Conecta. Todos los derechos reservados.
+          </span>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+Object.assign(window, { Home, Article, Topbar, VoicePicker, useBreakpoint, SCALE_LIMITS, selectVoices, SPEECH_RATES, AboutSection, Footer });
