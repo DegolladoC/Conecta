@@ -87,6 +87,13 @@ function articleSpeech(a) {
   return [a.title, ...a.body, 'Recuerda: ' + (a.points || []).join('. ')].join('. ');
 }
 
+const SPEECH_RATES = [
+  { label: 'Lenta',      rate: 0.7  },
+  { label: 'Normal',     rate: 0.9  },
+  { label: 'Rápida',     rate: 1.15 },
+  { label: 'Muy rápida', rate: 1.4  },
+];
+
 /* ---------- voice helpers ---------- */
 const FEMALE_HINTS = /laura|monica|paulina|maria|elena|isabel|rosa|carmen|pilar|lucia|diana|silvia|helena|ines|female|mujer/i;
 const MALE_HINTS   = /jorge|pablo|alejandro|carlos|juan|diego|enrique|sergio|antonio|manuel|pedro|miguel|alvaro|raul|male|hombre/i;
@@ -136,7 +143,7 @@ function ScaleControl({ scale, setScale, bp }) {
 }
 
 /* ---------- voice picker modal ---------- */
-function VoicePicker({ availableVoices, selectedVoiceName, setSelectedVoiceName, onClose }) {
+function VoicePicker({ availableVoices, selectedVoiceName, setSelectedVoiceName, speechRate, setSpeechRate, onClose }) {
   const [previewName, setPreviewName] = React.useState(null);
 
   const doPreview = (voice) => {
@@ -145,7 +152,7 @@ function VoicePicker({ availableVoices, selectedVoiceName, setSelectedVoiceName,
     synth.cancel();
     if (previewName === voice.name) { setPreviewName(null); return; }
     const u = new SpeechSynthesisUtterance('Hola, así es como suena mi voz.');
-    u.lang = voice.lang; u.rate = 0.9; u.pitch = 1.05; u.volume = 1; u.voice = voice;
+    u.lang = voice.lang; u.rate = speechRate; u.pitch = 1.05; u.volume = 1; u.voice = voice;
     u.onend = u.onerror = () => setPreviewName(null);
     synth.speak(u);
     setPreviewName(voice.name);
@@ -165,6 +172,24 @@ function VoicePicker({ availableVoices, selectedVoiceName, setSelectedVoiceName,
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
           <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 28, margin: 0, color: 'var(--text-strong)' }}>Elige una voz</h2>
           <button onClick={onClose} aria-label="Cerrar" style={{ width: 44, height: 44, borderRadius: '50%', border: 0, background: 'var(--surface-page)', cursor: 'pointer', fontSize: 22, color: 'var(--text-body)', display: 'grid', placeItems: 'center' }}>✕</button>
+        </div>
+        <div style={{ marginBottom: 28 }}>
+          <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 10px' }}>Velocidad de lectura</p>
+          <div style={{ display: 'flex', gap: 8 }}>
+            {SPEECH_RATES.map(sr => {
+              const sel = speechRate === sr.rate;
+              return (
+                <button key={sr.rate} onClick={() => setSpeechRate(sr.rate)} aria-label={sr.label} aria-pressed={sel}
+                  style={{ flex: 1, padding: '11px 4px', borderRadius: 12,
+                    border: `${sel ? '2.5px' : '1.5px'} solid ${sel ? 'var(--pine-700)' : 'var(--border-default)'}`,
+                    background: sel ? 'rgba(44,92,60,0.07)' : 'var(--surface-page)',
+                    cursor: 'pointer', fontSize: 15, fontWeight: sel ? 700 : 500,
+                    color: sel ? 'var(--pine-700)' : 'var(--text-body)', fontFamily: 'var(--font-sans)' }}>
+                  {sr.label}
+                </button>
+              );
+            })}
+          </div>
         </div>
         {availableVoices.length === 0 ? (
           <p style={{ fontSize: 18, color: 'var(--text-body)', lineHeight: 1.6 }}>No se encontraron voces en español en este dispositivo.</p>
@@ -379,4 +404,4 @@ function Article({ article, go, bp, scale, speak, speakingId }) {
   );
 }
 
-Object.assign(window, { Home, Article, Topbar, VoicePicker, useBreakpoint, SCALE_LIMITS, selectVoices });
+Object.assign(window, { Home, Article, Topbar, VoicePicker, useBreakpoint, SCALE_LIMITS, selectVoices, SPEECH_RATES });

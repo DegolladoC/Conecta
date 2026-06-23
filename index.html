@@ -33,6 +33,10 @@
     const [availableVoices, setAvailableVoices] = React.useState([]);
     const [selectedVoiceName, setSelectedVoiceName] = React.useState(() => localStorage.getItem('vp-conecta-voice') || '');
     const [voicePickerOpen, setVoicePickerOpen] = React.useState(false);
+    const [speechRate, setSpeechRate] = React.useState(() => {
+      const v = parseFloat(localStorage.getItem('vp-conecta-rate'));
+      return isNaN(v) ? 0.9 : v;
+    });
 
     // keep scale within the active device's limits + persist
     React.useEffect(() => {
@@ -53,6 +57,7 @@
       return () => { if (window.speechSynthesis) window.speechSynthesis.cancel(); };
     }, []);
     React.useEffect(() => { localStorage.setItem('vp-conecta-voice', selectedVoiceName); }, [selectedVoiceName]);
+    React.useEffect(() => { localStorage.setItem('vp-conecta-rate', String(speechRate)); }, [speechRate]);
 
     const stopSpeech = () => { if (window.speechSynthesis) window.speechSynthesis.cancel(); setSpeakingId(null); };
     const pickVoice = (voices) => {
@@ -73,7 +78,7 @@
       if (speakingId === id) { stopSpeech(); return; }
       synth.cancel();
       const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'es-ES'; u.rate = 0.9; u.pitch = 1.05; u.volume = 1;
+      u.lang = 'es-ES'; u.rate = speechRate; u.pitch = 1.05; u.volume = 1;
       const voices = synth.getVoices();
       const v = (selectedVoiceName && voices.find(x => x.name === selectedVoiceName))
              || (voices.length ? pickVoice(voices) : null);
@@ -92,7 +97,7 @@
           {route === 'home' && <Home go={go} bp={bp} speak={speak} speakingId={speakingId} />}
           {route === 'article' && <Article article={article} go={go} bp={bp} scale={1} speak={speak} speakingId={speakingId} />}
         </main>
-        {voicePickerOpen && <VoicePicker availableVoices={availableVoices} selectedVoiceName={selectedVoiceName} setSelectedVoiceName={setSelectedVoiceName} onClose={() => setVoicePickerOpen(false)} />}
+        {voicePickerOpen && <VoicePicker availableVoices={availableVoices} selectedVoiceName={selectedVoiceName} setSelectedVoiceName={setSelectedVoiceName} speechRate={speechRate} setSpeechRate={setSpeechRate} onClose={() => setVoicePickerOpen(false)} />}
       </div>
     );
   }
