@@ -125,7 +125,7 @@ const ARTICLES = [
     points: ['Come lácteos o alimentos ricos en calcio', 'Toma algo de sol cada día de forma segura', 'Consulta a tu médico sobre suplementos'] },
   { id: 'a2d', cat: 'nutricion', title: 'Hidratación: tan importante como lo que comes', mins: 4,
     excerpt: 'Con la edad se percibe menos la sed, pero la necesidad de agua sigue siendo igual o mayor.',
-    body: ['Uno de los cambios menos conocidos del envejecimiento es que disminuye la sensación de sed, lo que aumenta el riesgo de deshidratación incluso sin darse cuenta.',
+    body: ['Uno de los cambios menos conocidos de la longevidad es que disminuye la sensación de sed, lo que aumenta el riesgo de deshidratación incluso sin darse cuenta.',
       'Bebe agua de forma regular a lo largo del día, aunque no tengas sed. El objetivo habitual es entre seis y ocho vasos diarios. Las infusiones, los caldos y las frutas con mucha agua como la sandía o la naranja también cuentan.',
       'Señales de deshidratación: orina oscura, cansancio sin causa o dolor de cabeza. Si tomas diuréticos o hace mucho calor, necesitas beber más. Lleva siempre una botella de agua contigo.'],
     points: ['Bebe agua aunque no tengas sed', 'Orina clara es señal de buena hidratación', 'Las infusiones y caldos también hidratan'] },
@@ -658,7 +658,7 @@ function AboutSection({ bp, speak, speakingId }) {
     'Quiénes somos. Un espacio hecho con propósito, pensado para quienes más experiencia tienen.',
     'Vida Plena Conecta nació de la convicción de que las personas mayores merecen acceso fácil, claro y digno a la información que necesitan para cuidarse, mantenerse activas y seguir disfrutando la vida. Porque la experiencia no caduca: florece.',
     ...pillars.map(p => `${p.title}. ${p.text}`),
-    'Envejecer con dignidad no es un privilegio, es un derecho que construimos juntos, cada día, con información, comunidad y amor. — Equipo Vida Plena',
+    'Longevidad con dignidad no es un privilegio, es un derecho que construimos juntos, cada día, con información, comunidad y amor. — Equipo Vida Plena',
   ].join(' ');
   const isDesktop = bp === 'desktop';
   return (
@@ -702,7 +702,7 @@ function AboutSection({ bp, speak, speakingId }) {
         </div>
 
         <blockquote style={{ margin: `${s.pad + 8}px 0 0`, borderLeft: '4px solid var(--gold-500)', paddingLeft: 28, fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: s.tip, fontWeight: 500, color: 'var(--pine-700)', lineHeight: 1.5 }}>
-          "Envejecer con dignidad no es un privilegio, es un derecho que construimos juntos, cada día, con información, comunidad y amor."
+          "La longevidad con dignidad no es un privilegio, es un derecho que construimos juntos, cada día, con información, comunidad y amor."
           <span style={{ display: 'block', marginTop: 10, fontStyle: 'normal', fontSize: Math.round(s.tip * 0.65), fontWeight: 600, color: 'var(--text-muted)' }}>— Equipo Vida Plena</span>
         </blockquote>
       </div>
