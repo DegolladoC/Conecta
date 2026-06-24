@@ -433,7 +433,7 @@ function Topbar({ go, scale, setScale, bp, speak, speakingId, onVoicePicker }) {
   const compact = bp !== 'desktop';
   return (
     <header style={{ background: 'var(--surface-card)', borderBottom: '1px solid var(--border-subtle)', position: 'sticky', top: 0, zIndex: 20 }}>
-      <div style={{ maxWidth: 1120, margin: '0 auto', padding: compact ? '12px 18px' : '16px 32px', display: 'flex', alignItems: 'center', gap: compact ? 12 : 24 }}>
+      <div style={{ padding: compact ? '12px 18px' : '16px 32px', display: 'flex', alignItems: 'center', gap: compact ? 12 : 24 }}>
         <a onClick={() => go('home')} style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', flexShrink: 0 }}>
           <img src="./assets/logo-mark-transparent.png" alt="Vida Plena" style={{ height: compact ? 38 : 44 }} />
           <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: compact ? 22 : 26, color: 'var(--pine-700)' }}>Vida Plena</span>
